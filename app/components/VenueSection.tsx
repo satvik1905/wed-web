@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import { useRef } from 'react';
-import Image from 'next/image';
-import { motion, useInView } from 'framer-motion';
-import { Eyebrow, Display, Body, MapLink, Lines } from './Typography';
-import { useLang } from './LanguageContext';
+import { useRef } from "react";
+import Image from "next/image";
+import { motion, useInView } from "framer-motion";
+import { Eyebrow, Display, Body, MapLink } from "./Typography";
+import { useLang } from "./LanguageContext";
 
 const fade = {
   hidden: { opacity: 0, y: 24 },
@@ -13,57 +13,68 @@ const fade = {
 
 export default function VenueSection() {
   const ref = useRef<HTMLElement>(null);
-  const inView = useInView(ref, { once: true, margin: '-60px' });
+  const inView = useInView(ref, { once: true, margin: "-60px" });
   const { t } = useLang();
 
   return (
     <section
       ref={ref}
-      className="w-full flex flex-col items-center px-0"
-      style={{ background: '#1A0E0E', color: '#F5EBD9' }}
+      className="w-full"
+      style={{ background: "#1A0E0E", color: "#F5EBD9" }}
     >
+      {/* ── Venue info block ──────────────────────────────── */}
       <motion.div
-        className="px-6 pt-20 pb-8 md:pt-24 md:pb-10 text-center"
+        className="flex flex-col items-center text-center px-6 pt-12 pb-6"
         variants={fade}
         initial="hidden"
-        animate={inView ? 'visible' : 'hidden'}
-        transition={{ duration: 0.7, ease: 'easeOut' }}
+        animate={inView ? "visible" : "hidden"}
+        transition={{ duration: 0.7, ease: "easeOut", delay: 0.15 }}
       >
-        <Eyebrow>{t.venue.intro}</Eyebrow>
-      </motion.div>
+        <Eyebrow className="mb-4">{t.venue.intro}</Eyebrow>
 
-      <motion.div
-        className="relative w-full"
-        style={{ aspectRatio: '16 / 9' }}
-        variants={fade}
-        initial="hidden"
-        animate={inView ? 'visible' : 'hidden'}
-        transition={{ duration: 0.7, ease: 'easeOut', delay: 0.15 }}
-      >
-        <Image
-          src="/venue.jpg"
-          alt={t.venue.imageAlt}
-          fill
-          sizes="100vw"
-          style={{ objectFit: 'cover' }}
-          preload={false}
-        />
-      </motion.div>
+        <Display
+          className="text-center whitespace-pre-line"
+          color="ivory"
+        >
+          {t.venue.name}
+        </Display>
 
-      <motion.div
-        className="flex flex-col items-center px-6 pt-10 pb-20 md:pt-14 md:pb-28 gap-5"
-        variants={fade}
-        initial="hidden"
-        animate={inView ? 'visible' : 'hidden'}
-        transition={{ duration: 0.7, ease: 'easeOut', delay: 0.3 }}
-      >
-        <Display className="text-center">{t.venue.name}</Display>
-
-        <Body className="text-center max-w-[36ch]">
-          <Lines lines={t.venue.addressLines} />
+        <Body className="mt-3" style={{ color: "rgba(237,230,214,0.75)" }}>
+          {t.venue.location}
         </Body>
+      </motion.div>
 
-        <MapLink href="https://maps.app.goo.gl/8qvfKX2twfZdVVbFA" className="mt-2">
+      {/* ── Photo 2 — inset rounded ──────────────────────── */}
+      <motion.div
+        className="px-6 pb-10"
+        variants={fade}
+        initial="hidden"
+        animate={inView ? "visible" : "hidden"}
+        transition={{ duration: 0.7, ease: "easeOut", delay: 0.3 }}
+      >
+        <div
+          className="relative w-full overflow-hidden"
+          style={{ aspectRatio: "16 / 7", borderRadius: "1rem" }}
+        >
+          <Image
+            src="/venue.jpg"
+            alt={t.venue.image2Alt}
+            fill
+            sizes="(max-width: 768px) 90vw, 50vw"
+            style={{ objectFit: "cover" }}
+          />
+        </div>
+      </motion.div>
+
+      {/* ── Map link ─────────────────────────────────────── */}
+      <motion.div
+        className="flex justify-center px-6 pb-16"
+        variants={fade}
+        initial="hidden"
+        animate={inView ? "visible" : "hidden"}
+        transition={{ duration: 0.7, ease: "easeOut", delay: 0.4 }}
+      >
+        <MapLink href="https://maps.app.goo.gl/8qvfKX2twfZdVVbFA">
           {t.venue.mapLink}
         </MapLink>
       </motion.div>

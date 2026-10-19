@@ -1,17 +1,16 @@
 export type Lang = 'en' | 'mr';
 
-type InvitationBlock =
-  | { type: 'phrase'; lines: string[] }
-  | { type: 'names' }
-  | { type: 'honor'; lines: string[] };
-
 export interface Dictionary {
   ganpati: string;
   invitation: {
-    blocks: InvitationBlock[];
+    blessing: string;
+    hostLine: string;
     name1: string;
+    name1Parents: string;
+    conjunction: string;
     name2: string;
-    ampersand: string;
+    name2Parents: string;
+    closing: string;
   };
   scroll: string;
   tapToReveal: string;
@@ -37,9 +36,13 @@ export interface Dictionary {
   venue: {
     intro: string;
     name: string;
+    location: string;
     imageAlt: string;
+    image2Alt: string;
     addressLines: string[];
     mapLink: string;
+    stayHeading: string;
+    stayLines: string[];
   };
   itinerary: {
     heading: string;
@@ -56,16 +59,16 @@ export interface Dictionary {
 }
 
 const en: Dictionary = {
-  ganpati: '\u0965\u00A0\u0936\u094D\u0930\u0940 \u0917\u0923\u0947\u0936\u093E\u092F \u0928\u092E\u0903\u00A0\u0965',
+  ganpati: '\u0935\u0915\u094D\u0930\u0924\u0941\u0902\u0921 \u092E\u0939\u093E\u0915\u093E\u092F \u0938\u0942\u0930\u094D\u092F\u0915\u094B\u091F\u0940 \u0938\u092E\u092A\u094D\u0930\u092D\u0964\n\u0928\u093F\u0930\u094D\u0935\u093F\u0918\u094D\u0928\u0902 \u0915\u0941\u0930\u0941 \u092E\u0947 \u0926\u0947\u0935 \u0938\u0930\u094D\u0935\u0915\u093E\u0930\u094D\u092F\u0947\u0937\u0941 \u0938\u0930\u094D\u0935\u0926\u093E\u0965',
   invitation: {
-    blocks: [
-      { type: 'phrase', lines: ['You are cordially invited', 'to the wedding of'] },
-      { type: 'names' },
-      { type: 'honor', lines: ['It would be our honor to have you', 'as we begin a life together', 'on this auspicious occasion'] },
-    ],
+    blessing: 'With the blessings of the Almighty',
+    hostLine: 'Smt. Jyostna Khopkar requests the pleasure of your company at the wedding of her son',
     name1: 'Satvik',
+    name1Parents: '(son of Late Shri Jayant Ramachandra Khopkar & Smt. Jyostna Jayant Khopkar)',
+    conjunction: 'and',
     name2: 'Shalin',
-    ampersand: '&',
+    name2Parents: '(daughter of Shri Kunal Rajnikanta Deshmukh & Smt. Sarita Kunal Deshmukh)',
+    closing: '',
   },
   scroll: 'Scroll',
   tapToReveal: 'Tap to reveal',
@@ -89,15 +92,22 @@ const en: Dictionary = {
     footer: 'Until we celebrate together',
   },
   venue: {
-    intro: 'The celebration will take place at',
-    name: 'Hill Rock Resort & Villa',
+    intro: 'The venue',
+    name: 'Hill Rock Resort\nand Villas',
+    location: 'Karjat, Maharashtra',
     imageAlt: 'Hill Rock Resort & Villa \u2014 wedding venue in Karjat',
+    image2Alt: 'Hill Rock Resort & Villa \u2014 grounds',
     addressLines: [
       'Samir Farms No. 1646 Jite Village,',
       'Karjat Jite Village, Karjat \u2013 Neral Rd,',
       'Karjat, Maharashtra 410101, India',
     ],
     mapLink: 'View on Google Maps',
+    stayHeading: 'Stay details',
+    stayLines: [
+      'Accommodation will be arranged at the venue.',
+      'More details to follow soon.',
+    ],
   },
   itinerary: {
     heading: 'The Celebrations',
@@ -114,16 +124,16 @@ const en: Dictionary = {
 };
 
 const mr: Dictionary = {
-  ganpati: '\u0965\u00A0\u0936\u094D\u0930\u0940 \u0917\u0923\u0947\u0936\u093E\u092F \u0928\u092E\u0903\u00A0\u0965',
+  ganpati: '\u0935\u0915\u094D\u0930\u0924\u0941\u0902\u0921 \u092E\u0939\u093E\u0915\u093E\u092F \u0938\u0942\u0930\u094D\u092F\u0915\u094B\u091F\u0940 \u0938\u092E\u092A\u094D\u0930\u092D\u0964\n\u0928\u093F\u0930\u094D\u0935\u093F\u0918\u094D\u0928\u0902 \u0915\u0941\u0930\u0941 \u092E\u0947 \u0926\u0947\u0935 \u0938\u0930\u094D\u0935\u0915\u093E\u0930\u094D\u092F\u0947\u0937\u0941 \u0938\u0930\u094D\u0935\u0926\u093E\u0965',
   invitation: {
-    blocks: [
-      { type: 'names' },
-      { type: 'phrase', lines: ['\u092F\u093E\u0902\u091A\u094D\u092F\u093E \u0936\u0941\u092D \u0935\u093F\u0935\u093E\u0939\u093E\u0938', '\u0906\u092A\u0923\u093E\u0938 \u0938\u093E\u0926\u0930 \u0928\u093F\u092E\u0902\u0924\u094D\u0930\u093F\u0924'] },
-      { type: 'honor', lines: ['\u092F\u093E \u092E\u0902\u0917\u0932 \u092A\u094D\u0930\u0938\u0902\u0917\u0940', '\u0906\u092A\u0932\u0947 \u0938\u0939\u0915\u0941\u091F\u0941\u0902\u092C', '\u0939\u093E\u0930\u094D\u0926\u093F\u0915 \u0938\u094D\u0935\u093E\u0917\u0924'] },
-    ],
-    name1: '\u0938\u0924\u094D\u0935\u093F\u0915',
+    blessing: '\u0938\u0930\u094D\u0935\u0936\u0915\u094D\u0924\u093F\u092E\u093E\u0928 \u092A\u0930\u092E\u0947\u0936\u094D\u0935\u0930\u093E\u091A\u094D\u092F\u093E \u0906\u0936\u0940\u0930\u094D\u0935\u093E\u0926\u093E\u0928\u0947',
+    hostLine: '\u0938\u094C. \u091C\u094D\u092F\u094B\u0924\u094D\u0938\u094D\u0928\u093E \u0916\u094B\u092A\u0915\u0930 \u0906\u092A\u0923\u093E\u0938 \u0924\u094D\u092F\u093E\u0902\u091A\u094D\u092F\u093E \u092A\u0941\u0924\u094D\u0930\u093E\u091A\u094D\u092F\u093E',
+    name1: '\u0938\u093E\u0924\u094D\u0935\u093F\u0915',
+    name1Parents: '(\u0915\u0948. \u0936\u094D\u0930\u0940 \u091C\u092F\u0902\u0924 \u0930\u093E\u092E\u091A\u0902\u0926\u094D\u0930 \u0916\u094B\u092A\u0915\u0930 \u0935 \u0938\u094C. \u091C\u094D\u092F\u094B\u0924\u094D\u0938\u094D\u0928\u093E \u091C\u092F\u0902\u0924 \u0916\u094B\u092A\u0915\u0930 \u092F\u093E\u0902\u091A\u0947 \u0938\u0941\u092A\u0941\u0924\u094D\u0930)',
+    conjunction: '\u0906\u0923\u093F',
     name2: '\u0936\u093E\u0932\u093F\u0928',
-    ampersand: '\u0906\u0923\u093F',
+    name2Parents: '(\u0936\u094D\u0930\u0940 \u0915\u0941\u0923\u093E\u0932 \u0930\u091C\u0928\u0940\u0915\u093E\u0902\u0924 \u0926\u0947\u0936\u092E\u0941\u0916 \u0935 \u0938\u094C. \u0938\u0930\u093F\u0924\u093E \u0915\u0941\u0923\u093E\u0932 \u0926\u0947\u0936\u092E\u0941\u0916 \u092F\u093E\u0902\u091A\u0940 \u0938\u0941\u0915\u0928\u094D\u092F\u093E)',
+    closing: '\u092F\u093E\u0902\u091A\u094D\u092F\u093E \u0936\u0941\u092D\u0935\u093F\u0935\u093E\u0939 \u0938\u094B\u0939\u0933\u094D\u092F\u093E\u0938 \u0938\u093E\u0926\u0930 \u0928\u093F\u092E\u0902\u0924\u094D\u0930\u093F\u0924 \u0915\u0930\u0924\u093E\u0924',
   },
   scroll: '\u0938\u094D\u0915\u094D\u0930\u094B\u0932 \u0915\u0930\u093E',
   tapToReveal: '\u091F\u0945\u092A \u0915\u0930\u093E',
@@ -148,14 +158,21 @@ const mr: Dictionary = {
   },
   venue: {
     intro: '\u0938\u094B\u0939\u0933\u094D\u092F\u093E\u091A\u0947 \u0920\u093F\u0915\u093E\u0923',
-    name: 'Hill Rock Resort & Villa',
+    name: 'Hill Rock Resort\nand Villas',
+    location: '\u0915\u0930\u091C\u0924, \u092E\u0939\u093E\u0930\u093E\u0937\u094D\u091F\u094D\u0930',
     imageAlt: '\u0939\u093F\u0932 \u0930\u0949\u0915 \u0930\u093F\u0938\u0949\u0930\u094D\u091F \u2014 \u0915\u0930\u091C\u0924, \u0935\u093F\u0935\u093E\u0939\u0938\u094D\u0925\u0933',
+    image2Alt: '\u0939\u093F\u0932 \u0930\u0949\u0915 \u0930\u093F\u0938\u0949\u0930\u094D\u091F \u2014 \u092A\u0930\u093F\u0938\u0930',
     addressLines: [
       'Samir Farms No. 1646 Jite Village,',
       'Karjat Jite Village, Karjat \u2013 Neral Rd,',
       'Karjat, Maharashtra 410101, India',
     ],
     mapLink: '\u0917\u0942\u0917\u0932 \u092E\u0945\u092A\u094D\u0938\u0935\u0930 \u092A\u0939\u093E',
+    stayHeading: '\u0930\u093E\u0939\u0923\u094D\u092F\u093E\u091A\u0940 \u092E\u093E\u0939\u093F\u0924\u0940',
+    stayLines: [
+      '\u0930\u093E\u0939\u0923\u094D\u092F\u093E\u091A\u0940 \u0935\u094D\u092F\u0935\u0938\u094D\u0925\u093E \u0938\u094B\u0939\u0933\u094D\u092F\u093E\u091A\u094D\u092F\u093E \u0920\u093F\u0915\u093E\u0923\u0940 \u0915\u0947\u0932\u0940 \u091C\u093E\u0908\u0932.',
+      '\u0905\u0927\u093F\u0915 \u092E\u093E\u0939\u093F\u0924\u0940 \u0932\u0935\u0915\u0930\u091A.',
+    ],
   },
   itinerary: {
     heading: '\u0938\u094B\u0939\u0933\u0947',

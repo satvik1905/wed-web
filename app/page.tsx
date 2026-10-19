@@ -1,6 +1,6 @@
 'use client';
 
-import { Fragment, useState } from 'react';
+import { useState } from 'react';
 import VelvetIntro from './components/VelvetIntro';
 import ScratchSection from './components/ScratchSection';
 import CountdownSection from './components/CountdownSection';
@@ -8,13 +8,13 @@ import VenueSection from './components/VenueSection';
 import ItinerarySection from './components/ItinerarySection';
 import LanguageToggle from './components/LanguageToggle';
 import { LanguageProvider, useLang } from './components/LanguageContext';
-import { Eyebrow, DisplayXL, Display, Body, Lines, GOLD } from './components/Typography';
+import { Eyebrow, Display, Body, GOLD } from './components/Typography';
 import { motion, useScroll, useTransform } from 'framer-motion';
 
 function GoldDivider({ width = 'w-20' }: { width?: string }) {
   return (
     <div
-      className={`h-px ${width} my-8`}
+      className={`h-px ${width} my-5`}
       style={{ background: 'linear-gradient(to right, transparent, rgba(201, 154, 79, 0.7), transparent)' }}
       aria-hidden
     />
@@ -59,30 +59,54 @@ function ScrollCue() {
 
 function InvitationBlocks() {
   const { t } = useLang();
-  const { blocks, name1, name2, ampersand } = t.invitation;
+  const { blessing, hostLine, name1, name1Parents, conjunction, name2, name2Parents, closing } = t.invitation;
 
   return (
-    <>
-      {blocks.map((block, i) => (
-        <Fragment key={i}>
-          {i > 0 && <GoldDivider />}
-          {(block.type === 'phrase' || block.type === 'honor') && (
-            <Body className={`text-center ${block.type === 'phrase' ? 'max-w-[40ch]' : 'max-w-[36ch]'}`}>
-              <Lines lines={block.lines} />
-            </Body>
-          )}
-          {block.type === 'names' && (
-            <div className="flex flex-col items-center gap-2 md:gap-3">
-              <DisplayXL className="text-center">{name1}</DisplayXL>
-              <span aria-hidden>
-                <Display as="span" className="leading-none">{ampersand}</Display>
-              </span>
-              <DisplayXL className="text-center">{name2}</DisplayXL>
-            </div>
-          )}
-        </Fragment>
-      ))}
-    </>
+    <div className="flex flex-col items-center text-center max-w-[42ch]">
+      {/* Blessing */}
+      <Eyebrow as="p" className="mb-5">{blessing}</Eyebrow>
+
+      {/* Host line */}
+      <Body className="text-center">{hostLine}</Body>
+
+      {/* Groom name */}
+      <Display as="p" color="ivory" className="mt-2 mb-1">{name1}</Display>
+
+      {/* Groom parents */}
+      <p
+        className="text-center leading-relaxed"
+        style={{
+          fontFamily: 'var(--font-cormorant)',
+          fontSize: 'clamp(0.8rem, 3.2vw, 0.9rem)',
+          color: 'rgba(237, 230, 214, 0.8)',
+          letterSpacing: '0.01em',
+        }}
+      >
+        {name1Parents}
+      </p>
+
+      {/* Conjunction */}
+      <Display as="p" className="my-1">{conjunction}</Display>
+
+      {/* Bride name */}
+      <Display as="p" color="ivory" className="mb-1">{name2}</Display>
+
+      {/* Bride parents */}
+      <p
+        className="text-center leading-relaxed"
+        style={{
+          fontFamily: 'var(--font-cormorant)',
+          fontSize: 'clamp(0.8rem, 3.2vw, 0.9rem)',
+          color: 'rgba(237, 230, 214, 0.8)',
+          letterSpacing: '0.01em',
+        }}
+      >
+        {name2Parents}
+      </p>
+
+      {/* Closing (used in Marathi) */}
+      {closing && <Body className="text-center mt-3">{closing}</Body>}
+    </div>
   );
 }
 
@@ -94,7 +118,7 @@ function HomeContent() {
     <>
       <VelvetIntro onComplete={() => setIntroComplete(true)}>
         <main
-          className="min-h-[100svh] w-full flex flex-col items-center px-8 pt-16 pb-8"
+          className="min-h-[100svh] w-full flex flex-col items-center justify-center px-6 pt-8 pb-4"
           style={{ background: '#1A0E0E', color: '#F5EBD9' }}
         >
           {/* Blessing header: Ganesha + Sanskrit invocation */}
@@ -107,7 +131,7 @@ function HomeContent() {
             />
 
             <p
-              className="text-center leading-snug mt-5"
+              className="text-center leading-snug mt-5 whitespace-pre-line"
               style={{
                 fontFamily: 'var(--font-tiro-devanagari)',
                 fontSize: 'clamp(1.05rem, 4vw, 1.35rem)',
@@ -125,7 +149,7 @@ function HomeContent() {
           <InvitationBlocks />
 
           {/* Fixed-size gap before scroll cue */}
-          <div className="h-12 md:h-16" aria-hidden />
+          <div className="h-6 md:h-10" aria-hidden />
 
           {/* Scroll cue */}
           <ScrollCue />
