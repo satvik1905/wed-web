@@ -290,7 +290,7 @@ export default function ItinerarySection() {
             opacity="0.5"
           />
         </svg>
-        <Eyebrow>{t.itinerary.heading}</Eyebrow>
+        <Display color="ivory">{t.itinerary.heading}</Display>
       </div>
 
       <div className="mx-auto" style={{ maxWidth: CONFIG.COLUMN_MAX_WIDTH }}>

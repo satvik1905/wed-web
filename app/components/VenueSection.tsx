@@ -30,18 +30,24 @@ export default function VenueSection() {
         animate={inView ? "visible" : "hidden"}
         transition={{ duration: 0.7, ease: "easeOut", delay: 0.15 }}
       >
-        <Eyebrow className="mb-4">{t.venue.intro}</Eyebrow>
+        <Display color="ivory" className="mb-3">{t.venue.intro}</Display>
 
         <Display
           className="text-center whitespace-pre-line"
           color="ivory"
+          style={{ fontSize: 'clamp(2.4rem, 9vw, 3.8rem)' }}
         >
           {t.venue.name}
         </Display>
 
-        <Body className="mt-3" style={{ color: "rgba(237,230,214,0.75)" }}>
+        <Display
+          as="p"
+          color="gold"
+          className="mt-3"
+          style={{ fontSize: 'clamp(1.1rem, 4vw, 1.4rem)', fontWeight: 400 }}
+        >
           {t.venue.location}
-        </Body>
+        </Display>
       </motion.div>
 
       {/* ── Photo 2 — inset rounded ──────────────────────── */}

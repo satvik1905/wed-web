@@ -44,6 +44,18 @@ export interface Dictionary {
     stayHeading: string;
     stayLines: string[];
   };
+  rsvp: {
+    heading: string;
+    firstName: string;
+    lastName: string;
+    phone: string;
+    attending: string;
+    attendingYes: string;
+    attendingNo: string;
+    guestCount: string;
+    submit: string;
+    submitted: string;
+  };
   itinerary: {
     heading: string;
     day1: string;
@@ -127,6 +139,18 @@ const en: Dictionary = {
       'More details to follow soon.',
     ],
   },
+  rsvp: {
+    heading: 'RSVP',
+    firstName: 'First Name',
+    lastName: 'Last Name',
+    phone: 'Phone',
+    attending: 'Will you be attending?',
+    attendingYes: 'Yes',
+    attendingNo: 'No',
+    guestCount: 'Number of Guests',
+    submit: 'Submit',
+    submitted: 'Thank you for your response!',
+  },
   itinerary: {
     heading: 'The Celebrations',
     day1: '26th December',
@@ -209,6 +233,18 @@ const mr: Dictionary = {
       '\u0930\u093E\u0939\u0923\u094D\u092F\u093E\u091A\u0940 \u0935\u094D\u092F\u0935\u0938\u094D\u0925\u093E \u0938\u094B\u0939\u0933\u094D\u092F\u093E\u091A\u094D\u092F\u093E \u0920\u093F\u0915\u093E\u0923\u0940 \u0915\u0947\u0932\u0940 \u091C\u093E\u0908\u0932.',
       '\u0905\u0927\u093F\u0915 \u092E\u093E\u0939\u093F\u0924\u0940 \u0932\u0935\u0915\u0930\u091A.',
     ],
+  },
+  rsvp: {
+    heading: 'RSVP',
+    firstName: '\u092A\u0939\u093F\u0932\u0947 \u0928\u093E\u0935',
+    lastName: '\u0906\u0921\u0928\u093E\u0935',
+    phone: '\u092B\u094B\u0928',
+    attending: '\u0924\u0941\u092E\u094D\u0939\u0940 \u0909\u092A\u0938\u094D\u0925\u093F\u0924 \u0930\u093E\u0939\u093E\u0932 \u0915\u093E?',
+    attendingYes: '\u0939\u094B\u092F',
+    attendingNo: '\u0928\u093E\u0939\u0940',
+    guestCount: '\u092A\u093E\u0939\u0941\u0923\u094D\u092F\u093E\u0902\u091A\u0940 \u0938\u0902\u0916\u094D\u092F\u093E',
+    submit: '\u0938\u0941\u092A\u0942\u0930\u094D\u0926 \u0915\u0930\u093E',
+    submitted: '\u0924\u0941\u092E\u091A\u094D\u092F\u093E \u092A\u094D\u0930\u0924\u093F\u0938\u093E\u0926\u093E\u092C\u0926\u094D\u0926\u0932 \u0927\u0928\u094D\u092F\u0935\u093E\u0926!',
   },
   itinerary: {
     heading: '\u0938\u094B\u0939\u0933\u0947',

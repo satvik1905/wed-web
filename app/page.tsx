@@ -4,6 +4,7 @@ import { useState } from 'react';
 import VelvetIntro from './components/VelvetIntro';
 import ScratchSection from './components/ScratchSection';
 import CountdownSection from './components/CountdownSection';
+import RsvpSection from './components/RsvpSection';
 import VenueSection from './components/VenueSection';
 import ItinerarySection from './components/ItinerarySection';
 import LanguageToggle from './components/LanguageToggle';
@@ -77,8 +78,8 @@ function InvitationBlocks() {
         className="text-center leading-relaxed"
         style={{
           fontFamily: 'var(--font-cormorant)',
-          fontSize: 'clamp(0.8rem, 3.2vw, 0.9rem)',
-          color: 'rgba(237, 230, 214, 0.8)',
+          fontSize: 'clamp(0.9rem, 3.5vw, 1rem)',
+          color: 'rgba(237, 230, 214, 1.0)',
           letterSpacing: '0.01em',
         }}
       >
@@ -96,8 +97,8 @@ function InvitationBlocks() {
         className="text-center leading-relaxed"
         style={{
           fontFamily: 'var(--font-cormorant)',
-          fontSize: 'clamp(0.8rem, 3.2vw, 0.9rem)',
-          color: 'rgba(237, 230, 214, 0.8)',
+          fontSize: 'clamp(0.9rem, 3.5vw, 1rem)',
+          color: 'rgba(237, 230, 214, 1.0)',
           letterSpacing: '0.01em',
         }}
       >
@@ -134,7 +135,7 @@ function HomeContent() {
               className="text-center leading-snug mt-5 whitespace-pre-line"
               style={{
                 fontFamily: 'var(--font-tiro-devanagari)',
-                fontSize: 'clamp(1.05rem, 4vw, 1.35rem)',
+                fontSize: 'clamp(0.85rem, 3.2vw, 1rem)',
                 color: '#F5EBD9',
                 letterSpacing: '0.04em',
               }}
@@ -157,6 +158,7 @@ function HomeContent() {
         <ScratchSection />
         <VenueSection />
         <ItinerarySection />
+        <RsvpSection />
         <CountdownSection />
       </VelvetIntro>
       <LanguageToggle visible={introComplete} />
