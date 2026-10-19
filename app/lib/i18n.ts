@@ -52,9 +52,27 @@ export interface Dictionary {
     afternoon: string;
     evening: string;
     haldi: string;
+    haldiTime: string;
+    haldiDesc: string;
+    haldiDress: string;
     mayra: string;
+    mayraTime: string;
+    mayraDesc: string;
+    mayraDress: string;
     sangeet: string;
+    sangeetTime: string;
+    sangeetDesc: string;
+    sangeetDress: string;
     wedding: string;
+    weddingDesc: string;
+    weddingDress: string;
+    reception: string;
+    receptionTime: string;
+    receptionDesc: string;
+    receptionDress: string;
+    dressLabel: string;
+    muhuratLabel: string;
+    muhuratTime: string;
   };
 }
 
@@ -67,7 +85,7 @@ const en: Dictionary = {
     name1Parents: '(son of Late Shri Jayant Ramachandra Khopkar & Smt. Jyostna Jayant Khopkar)',
     conjunction: 'and',
     name2: 'Shalin',
-    name2Parents: '(daughter of Shri Kunal Rajnikanta Deshmukh & Smt. Sarita Kunal Deshmukh)',
+    name2Parents: '(daughter of Shri Kunal Rajnikanta Deshmukh & Sau. Sarita Kunal Deshmukh)',
     closing: '',
   },
   scroll: 'Scroll',
@@ -117,9 +135,27 @@ const en: Dictionary = {
     afternoon: 'Afternoon',
     evening: 'Evening',
     haldi: 'Haldi',
+    haldiTime: '',
+    haldiDesc: '',
+    haldiDress: '',
     mayra: 'Mayra',
+    mayraTime: '',
+    mayraDesc: '',
+    mayraDress: '',
     sangeet: 'Sangeet',
+    sangeetTime: '7 PM',
+    sangeetDesc: '',
+    sangeetDress: '',
     wedding: 'Wedding',
+    weddingDesc: '',
+    weddingDress: '',
+    reception: 'Reception',
+    receptionTime: '',
+    receptionDesc: '',
+    receptionDress: '',
+    dressLabel: 'Wear',
+    muhuratLabel: 'Shubh Muhurat',
+    muhuratTime: '',
   },
 };
 
@@ -182,9 +218,27 @@ const mr: Dictionary = {
     afternoon: '\u0926\u0941\u092A\u093E\u0930',
     evening: '\u0938\u0902\u0927\u094D\u092F\u093E\u0915\u093E\u0933',
     haldi: '\u0939\u0933\u0926',
+    haldiTime: '',
+    haldiDesc: '',
+    haldiDress: '',
     mayra: '\u092E\u093E\u092F\u0930\u093E',
+    mayraTime: '',
+    mayraDesc: '',
+    mayraDress: '',
     sangeet: '\u0938\u0902\u0917\u0940\u0924',
+    sangeetTime: '7 PM',
+    sangeetDesc: '',
+    sangeetDress: '',
     wedding: '\u0932\u0917\u094D\u0928\u0938\u094B\u0939\u0933\u093E',
+    weddingDesc: '',
+    weddingDress: '',
+    reception: '\u0938\u094D\u0935\u093E\u0917\u0924 \u0938\u092E\u093E\u0930\u0902\u092D',
+    receptionTime: '',
+    receptionDesc: '',
+    receptionDress: '',
+    dressLabel: '\u092A\u094B\u0936\u093E\u0916',
+    muhuratLabel: '\u0936\u0941\u092D \u092E\u0941\u0939\u0942\u0930\u094D\u0924',
+    muhuratTime: '',
   },
 };
 
