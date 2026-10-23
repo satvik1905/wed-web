@@ -16,9 +16,11 @@ type Stage = 'idle' | 'revealing' | 'fading' | 'done';
 interface VelvetIntroProps {
   children: ReactNode;
   onComplete?: () => void;
+  /** Called synchronously on the intro tap — use for user-gesture-gated work (e.g. audio). */
+  onTap?: () => void;
 }
 
-export default function VelvetIntro({ children, onComplete }: VelvetIntroProps) {
+export default function VelvetIntro({ children, onComplete, onTap }: VelvetIntroProps) {
   const [stage, setStage] = useState<Stage>('idle');
   const videoRef = useRef<HTMLVideoElement>(null);
   const fadeTimeout = useRef<ReturnType<typeof setTimeout>>(undefined);
@@ -62,6 +64,7 @@ export default function VelvetIntro({ children, onComplete }: VelvetIntroProps) 
   // ── Tap handler ────────────────────────────────────────────────────────────
   const handleTap = useCallback(() => {
     if (stage !== 'idle') return;
+    onTap?.();
     setStage('revealing');
 
     const video = videoRef.current;

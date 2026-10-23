@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import VelvetIntro from './components/VelvetIntro';
 import ScratchSection from './components/ScratchSection';
 import CountdownSection from './components/CountdownSection';
@@ -10,6 +10,7 @@ import ItinerarySection from './components/ItinerarySection';
 import TimelineRailSection from './components/TimelineRailSection';
 import FullBleedCardsSection from './components/FullBleedCardsSection';
 import LanguageToggle from './components/LanguageToggle';
+import MusicToggle, { type MusicToggleHandle } from './components/MusicToggle';
 import { LanguageProvider, useLang } from './components/LanguageContext';
 import { Eyebrow, Display, Body, GOLD } from './components/Typography';
 import { motion, useScroll, useTransform } from 'framer-motion';
@@ -115,11 +116,12 @@ function InvitationBlocks() {
 
 function HomeContent() {
   const [introComplete, setIntroComplete] = useState(false);
+  const musicRef = useRef<MusicToggleHandle>(null);
   const { t } = useLang();
 
   return (
     <>
-      <VelvetIntro onComplete={() => setIntroComplete(true)}>
+      <VelvetIntro onComplete={() => setIntroComplete(true)} onTap={() => musicRef.current?.start()}>
         <main
           className="min-h-[100svh] w-full flex flex-col items-center justify-center px-6 pt-8 pb-4"
           style={{ background: '#1A0E0E', color: '#F5EBD9' }}
@@ -165,6 +167,7 @@ function HomeContent() {
         <RsvpSection />
         <CountdownSection />
       </VelvetIntro>
+      <MusicToggle ref={musicRef} visible={introComplete} />
       <LanguageToggle visible={introComplete} />
     </>
   );
