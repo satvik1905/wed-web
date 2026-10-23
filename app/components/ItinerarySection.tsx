@@ -28,8 +28,8 @@ const CONFIG = {
 
 /** Illustration paths — leave empty until file is in /public. */
 const ILLUSTRATIONS: Record<string, string> = {
-  haldi: '',            // TODO: add /public/haldi.png
-  mayra: '',            // TODO: add /public/mayra.png
+  haldi: '/haldi.png',
+  mayra: '/mayra.png',
   sangeet: '/sangeet.png',
   wedding: '',          // TODO: add /public/wedding.png
   reception: '',        // TODO: add /public/reception.png

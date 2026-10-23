@@ -7,6 +7,8 @@ import CountdownSection from './components/CountdownSection';
 import RsvpSection from './components/RsvpSection';
 import VenueSection from './components/VenueSection';
 import ItinerarySection from './components/ItinerarySection';
+import TimelineRailSection from './components/TimelineRailSection';
+import FullBleedCardsSection from './components/FullBleedCardsSection';
 import LanguageToggle from './components/LanguageToggle';
 import { LanguageProvider, useLang } from './components/LanguageContext';
 import { Eyebrow, Display, Body, GOLD } from './components/Typography';
@@ -158,6 +160,8 @@ function HomeContent() {
         <ScratchSection />
         <VenueSection />
         <ItinerarySection />
+        <TimelineRailSection />
+        <FullBleedCardsSection />
         <RsvpSection />
         <CountdownSection />
       </VelvetIntro>
