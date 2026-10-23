@@ -15,7 +15,7 @@ import { GOLD } from './Typography';
    ═══════════════════════════════════════════════════════════════ */
 
 /** Drop the audio file into /public and update this path. */
-const AUDIO_SRC = '/background-music.mp3';
+const AUDIO_SRC = '/background-music.m4a';
 
 /** Set to false for a one-shot track. */
 const AUDIO_LOOP = true;
