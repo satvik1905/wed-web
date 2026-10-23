@@ -6,12 +6,15 @@ import { useLang } from './LanguageContext';
 
 const GOLD_BORDER = 'rgba(201, 154, 79, 0.35)';
 
+const INPUT_BG = 'rgba(255, 255, 255, 0.06)';
+const INPUT_TEXT = '#F5EBD9';
+
 const inputStyle: React.CSSProperties = {
-  background: 'rgba(255, 255, 255, 0.06)',
+  background: INPUT_BG,
   border: `1px solid ${GOLD_BORDER}`,
   borderRadius: 8,
   padding: '10px 14px',
-  color: '#F5EBD9',
+  color: INPUT_TEXT,
   fontFamily: 'var(--font-geist-sans)',
   fontSize: '0.875rem',
   width: '100%',
@@ -28,17 +31,32 @@ const labelStyle: React.CSSProperties = {
   marginBottom: 4,
 };
 
+/** CSS to override browser autofill backgrounds (WebKit + standard). */
+const autofillOverrideCSS = `
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0 1000px rgba(30, 18, 18, 1) inset !important;
+    -webkit-text-fill-color: ${INPUT_TEXT} !important;
+    border-color: ${GOLD_BORDER} !important;
+    transition: background-color 5000s ease-in-out 0s;
+  }
+  input:autofill {
+    background: ${INPUT_BG} !important;
+    color: ${INPUT_TEXT} !important;
+  }
+`;
+
 export default function RsvpSection() {
   const { t } = useLang();
 
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [phone, setPhone] = useState('');
+  const [name, setName] = useState('');
   const [attending, setAttending] = useState<'yes' | 'no' | ''>('');
   const [guestCount, setGuestCount] = useState('');
   const [submitted, setSubmitted] = useState(false);
 
-  const isValid = firstName.trim() && lastName.trim() && attending && guestCount;
+  const isYes = attending === 'yes';
+  const isValid = name.trim() && attending && (isYes ? guestCount : true);
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -63,6 +81,8 @@ export default function RsvpSection() {
       className="w-full flex flex-col items-center px-6 py-20"
       style={{ background: '#1A0E0E' }}
     >
+      <style dangerouslySetInnerHTML={{ __html: autofillOverrideCSS }} />
+
       <div className="flex flex-col items-center gap-3 mb-10">
         <Display color="ivory">{t.rsvp.heading}</Display>
       </div>
@@ -81,38 +101,15 @@ export default function RsvpSection() {
         onSubmit={handleSubmit}
         className="flex flex-col gap-4"
       >
-        {/* Name row */}
-        <div className="grid grid-cols-2 gap-3">
-          <div>
-            <label style={labelStyle}>{t.rsvp.firstName} *</label>
-            <input
-              type="text"
-              value={firstName}
-              onChange={(e) => setFirstName(e.target.value)}
-              style={inputStyle}
-              required
-            />
-          </div>
-          <div>
-            <label style={labelStyle}>{t.rsvp.lastName} *</label>
-            <input
-              type="text"
-              value={lastName}
-              onChange={(e) => setLastName(e.target.value)}
-              style={inputStyle}
-              required
-            />
-          </div>
-        </div>
-
-        {/* Phone */}
+        {/* Name */}
         <div>
-          <label style={labelStyle}>{t.rsvp.phone}</label>
+          <label style={labelStyle}>{t.rsvp.name} *</label>
           <input
-            type="tel"
-            value={phone}
-            onChange={(e) => setPhone(e.target.value)}
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
             style={inputStyle}
+            required
           />
         </div>
 
@@ -120,44 +117,49 @@ export default function RsvpSection() {
         <div>
           <label style={labelStyle}>{t.rsvp.attending} *</label>
           <div className="grid grid-cols-2 gap-3 mt-1">
-            {(['yes', 'no'] as const).map((val) => (
-              <button
-                key={val}
-                type="button"
-                onClick={() => setAttending(val)}
-                style={{
-                  ...inputStyle,
-                  textAlign: 'center',
-                  cursor: 'pointer',
-                  transition: 'background 0.2s, border-color 0.2s',
-                  background:
-                    attending === val
-                      ? 'rgba(224, 184, 79, 0.15)'
+            {(['yes', 'no'] as const).map((val) => {
+              const selected = attending === val;
+              return (
+                <button
+                  key={val}
+                  type="button"
+                  onClick={() => setAttending(val)}
+                  style={{
+                    ...inputStyle,
+                    textAlign: 'center',
+                    cursor: 'pointer',
+                    transition: 'background 0.2s, border-color 0.2s, color 0.2s',
+                    background: selected
+                      ? 'rgba(224, 184, 79, 0.22)'
                       : 'rgba(255, 255, 255, 0.06)',
-                  borderColor:
-                    attending === val
-                      ? 'rgba(224, 184, 79, 0.6)'
+                    borderColor: selected
+                      ? GOLD
                       : GOLD_BORDER,
-                }}
-              >
-                {val === 'yes' ? t.rsvp.attendingYes : t.rsvp.attendingNo}
-              </button>
-            ))}
+                    color: selected ? GOLD : INPUT_TEXT,
+                    fontWeight: selected ? 600 : 400,
+                  }}
+                >
+                  {val === 'yes' ? t.rsvp.attendingYes : t.rsvp.attendingNo}
+                </button>
+              );
+            })}
           </div>
         </div>
 
-        {/* Guest count */}
-        <div>
-          <label style={labelStyle}>{t.rsvp.guestCount} *</label>
-          <input
-            type="number"
-            min="1"
-            value={guestCount}
-            onChange={(e) => setGuestCount(e.target.value)}
-            style={inputStyle}
-            required
-          />
-        </div>
+        {/* Guest count — visible only when "Yes" */}
+        {isYes && (
+          <div>
+            <label style={labelStyle}>{t.rsvp.guestCount} *</label>
+            <input
+              type="number"
+              min="1"
+              value={guestCount}
+              onChange={(e) => setGuestCount(e.target.value)}
+              style={inputStyle}
+              required
+            />
+          </div>
+        )}
 
         {/* Submit */}
         <button

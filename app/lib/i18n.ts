@@ -46,9 +46,7 @@ export interface Dictionary {
   };
   rsvp: {
     heading: string;
-    firstName: string;
-    lastName: string;
-    phone: string;
+    name: string;
     attending: string;
     attendingYes: string;
     attendingNo: string;
@@ -141,9 +139,7 @@ const en: Dictionary = {
   },
   rsvp: {
     heading: 'RSVP',
-    firstName: 'First Name',
-    lastName: 'Last Name',
-    phone: 'Phone',
+    name: 'Name',
     attending: 'Will you be attending?',
     attendingYes: 'Yes',
     attendingNo: 'No',
@@ -236,9 +232,7 @@ const mr: Dictionary = {
   },
   rsvp: {
     heading: 'RSVP',
-    firstName: '\u092A\u0939\u093F\u0932\u0947 \u0928\u093E\u0935',
-    lastName: '\u0906\u0921\u0928\u093E\u0935',
-    phone: '\u092B\u094B\u0928',
+    name: '\u0928\u093E\u0935',
     attending: '\u0924\u0941\u092E\u094D\u0939\u0940 \u0909\u092A\u0938\u094D\u0925\u093F\u0924 \u0930\u093E\u0939\u093E\u0932 \u0915\u093E?',
     attendingYes: '\u0939\u094B\u092F',
     attendingNo: '\u0928\u093E\u0939\u0940',
