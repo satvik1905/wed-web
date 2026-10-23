@@ -6,7 +6,7 @@ import { Eyebrow, Display, EventName, GOLD } from './Typography';
 import { useLang } from './LanguageContext';
 
 /* ═══════════════════════════════════════════════════════════════
-   Option B — Full-Bleed Cards (temporary, for comparison)
+   Full-Bleed Cards — The Celebrations
    ═══════════════════════════════════════════════════════════════ */
 
 const CONFIG = {
@@ -271,12 +271,16 @@ export default function FullBleedCardsSection() {
       className="w-full px-4 sm:px-6 py-20 md:py-28"
       style={{ background: '#1A0E0E' }}
     >
-      {/* ── Section label ──────────────────────────────── */}
+      {/* ── Section heading ──────────────────────────── */}
       <div className="flex flex-col items-center gap-3 mb-10">
-        <Eyebrow style={{ opacity: 0.5 }}>Option B</Eyebrow>
-        <Display color="ivory" style={{ fontSize: 'clamp(1.6rem, 6vw, 2.2rem)' }}>
-          Full-Bleed Cards
-        </Display>
+        <svg width="24" height="14" viewBox="0 0 24 14" fill="none" aria-hidden>
+          <path
+            d="M12 2C8 2 4 0 1 0C1 4 4 7 8 7C4 7 1 10 1 14C4 14 8 12 12 12C16 12 20 14 23 14C23 10 20 7 16 7C20 7 23 4 23 0C20 0 16 2 12 2Z"
+            fill={GOLD}
+            opacity="0.5"
+          />
+        </svg>
+        <Display color="ivory">{t.itinerary.heading}</Display>
       </div>
 
       <div className="mx-auto" style={{ maxWidth: CONFIG.COLUMN_MAX }}>

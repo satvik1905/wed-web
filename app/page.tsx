@@ -6,8 +6,6 @@ import ScratchSection from './components/ScratchSection';
 import CountdownSection from './components/CountdownSection';
 import RsvpSection from './components/RsvpSection';
 import VenueSection from './components/VenueSection';
-import ItinerarySection from './components/ItinerarySection';
-import TimelineRailSection from './components/TimelineRailSection';
 import FullBleedCardsSection from './components/FullBleedCardsSection';
 import LanguageToggle from './components/LanguageToggle';
 import MusicToggle, { type MusicToggleHandle } from './components/MusicToggle';
@@ -68,7 +66,7 @@ function InvitationBlocks() {
   return (
     <div className="flex flex-col items-center text-center max-w-[42ch]">
       {/* Blessing */}
-      <Eyebrow as="p" className="mb-5">{blessing}</Eyebrow>
+      {blessing && <Eyebrow as="p" className="mb-5">{blessing}</Eyebrow>}
 
       {/* Host line */}
       <Body className="text-center">{hostLine}</Body>
@@ -123,9 +121,12 @@ function HomeContent() {
     <>
       <VelvetIntro onComplete={() => setIntroComplete(true)} onTap={() => musicRef.current?.start()}>
         <main
-          className="min-h-[100svh] w-full flex flex-col items-center justify-center px-6 pt-8 pb-4"
+          className="min-h-[100svh] w-full flex flex-col items-center px-6 pt-8 pb-4"
           style={{ background: '#1A0E0E', color: '#F5EBD9' }}
         >
+          {/* Top spacer — pushes content toward vertical centre */}
+          <div className="flex-1" aria-hidden />
+
           {/* Blessing header: Ganesha + Sanskrit invocation */}
           <div className="flex flex-col items-center">
             <img
@@ -153,16 +154,14 @@ function HomeContent() {
 
           <InvitationBlocks />
 
-          {/* Fixed-size gap before scroll cue */}
-          <div className="h-6 md:h-10" aria-hidden />
+          {/* Bottom spacer — pushes scroll cue to bottom */}
+          <div className="flex-1" aria-hidden />
 
           {/* Scroll cue */}
           <ScrollCue />
         </main>
         <ScratchSection />
         <VenueSection />
-        <ItinerarySection />
-        <TimelineRailSection />
         <FullBleedCardsSection />
         <RsvpSection />
         <CountdownSection />
