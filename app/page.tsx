@@ -7,6 +7,7 @@ import CountdownSection from './components/CountdownSection';
 import RsvpSection from './components/RsvpSection';
 import VenueSection from './components/VenueSection';
 import FullBleedCardsSection from './components/FullBleedCardsSection';
+import ClosingSection from './components/ClosingSection';
 import LanguageToggle from './components/LanguageToggle';
 import MusicToggle, { type MusicToggleHandle } from './components/MusicToggle';
 import { LanguageProvider, useLang } from './components/LanguageContext';
@@ -164,6 +165,7 @@ function HomeContent() {
         <VenueSection />
         <FullBleedCardsSection />
         <RsvpSection />
+        <ClosingSection />
         <CountdownSection />
       </VelvetIntro>
       <MusicToggle ref={musicRef} visible={introComplete} />
