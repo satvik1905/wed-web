@@ -27,8 +27,25 @@ const tiroDevanagari = Tiro_Devanagari_Marathi({
 });
 
 export const metadata: Metadata = {
-  title: "Satvik & Shalin",
-  description: "Save the date — December 2026",
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL ?? "https://localhost:3000"
+  ),
+  title: "Shalin Weds Satvik",
+  description:
+    "Join us as we begin our forever \u00b7 26\u201327 December 2026, Hill Rock Resort, Karjat",
+  openGraph: {
+    title: "Shalin Weds Satvik",
+    description:
+      "Join us as we begin our forever \u00b7 26\u201327 December 2026, Hill Rock Resort, Karjat",
+    type: "website",
+    locale: "en_IN",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Shalin Weds Satvik",
+    description:
+      "Join us as we begin our forever \u00b7 26\u201327 December 2026, Hill Rock Resort, Karjat",
+  },
 };
 
 export default function RootLayout({
