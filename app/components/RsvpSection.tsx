@@ -1,13 +1,19 @@
 'use client';
 
 import { useState } from 'react';
-import { Eyebrow, Display, GOLD } from './Typography';
+import { Eyebrow, Display, Body, GOLD } from './Typography';
 import { useLang } from './LanguageContext';
 
 const GOLD_BORDER = 'rgba(201, 154, 79, 0.35)';
 
 const INPUT_BG = 'rgba(255, 255, 255, 0.06)';
 const INPUT_TEXT = '#F5EBD9';
+
+/**
+ * Google Apps Script Web App URL.
+ * Set NEXT_PUBLIC_RSVP_URL in Vercel env vars (or .env.local for dev).
+ */
+const RSVP_ENDPOINT = process.env.NEXT_PUBLIC_RSVP_URL ?? '';
 
 const inputStyle: React.CSSProperties = {
   background: INPUT_BG,
@@ -53,19 +59,40 @@ export default function RsvpSection() {
   const [name, setName] = useState('');
   const [attending, setAttending] = useState<'yes' | 'no' | ''>('');
   const [guestCount, setGuestCount] = useState('');
-  const [submitted, setSubmitted] = useState(false);
+  const [status, setStatus] = useState<'idle' | 'submitting' | 'submitted' | 'error'>('idle');
 
   const isYes = attending === 'yes';
   const isValid = name.trim() && attending && (isYes ? guestCount : true);
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (!isValid) return;
-    // TODO: wire up to backend / Google Sheets / etc.
-    setSubmitted(true);
+    if (!isValid || status === 'submitting') return;
+
+    setStatus('submitting');
+
+    try {
+      const payload = {
+        name: name.trim(),
+        attending,
+        guestCount: isYes ? Number(guestCount) : 0,
+      };
+
+      const res = await fetch(RSVP_ENDPOINT, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+
+      // no-cors returns opaque response (status 0), so we can't check res.ok.
+      // If fetch didn't throw, the request was sent successfully.
+      setStatus('submitted');
+    } catch {
+      setStatus('error');
+    }
   }
 
-  if (submitted) {
+  if (status === 'submitted') {
     return (
       <section
         className="w-full flex flex-col items-center px-6 py-20"
@@ -75,6 +102,8 @@ export default function RsvpSection() {
       </section>
     );
   }
+
+  const isSubmitting = status === 'submitting';
 
   return (
     <section
@@ -110,6 +139,7 @@ export default function RsvpSection() {
             onChange={(e) => setName(e.target.value)}
             style={inputStyle}
             required
+            disabled={isSubmitting}
           />
         </div>
 
@@ -124,10 +154,11 @@ export default function RsvpSection() {
                   key={val}
                   type="button"
                   onClick={() => setAttending(val)}
+                  disabled={isSubmitting}
                   style={{
                     ...inputStyle,
                     textAlign: 'center',
-                    cursor: 'pointer',
+                    cursor: isSubmitting ? 'not-allowed' : 'pointer',
                     transition: 'background 0.2s, border-color 0.2s, color 0.2s',
                     background: selected
                       ? 'rgba(224, 184, 79, 0.22)'
@@ -157,32 +188,47 @@ export default function RsvpSection() {
               onChange={(e) => setGuestCount(e.target.value)}
               style={inputStyle}
               required
+              disabled={isSubmitting}
             />
           </div>
+        )}
+
+        {/* Error message */}
+        {status === 'error' && (
+          <Body
+            as="p"
+            style={{
+              fontSize: '0.85rem',
+              color: '#e57373',
+              textAlign: 'center',
+            }}
+          >
+            {t.rsvp.error}
+          </Body>
         )}
 
         {/* Submit */}
         <button
           type="submit"
-          disabled={!isValid}
+          disabled={!isValid || isSubmitting}
           style={{
             marginTop: 8,
             padding: '12px 24px',
             borderRadius: 9999,
-            border: `1px solid ${isValid ? 'rgba(224, 184, 79, 0.6)' : GOLD_BORDER}`,
-            background: isValid ? 'rgba(224, 184, 79, 0.15)' : 'transparent',
+            border: `1px solid ${isValid && !isSubmitting ? 'rgba(224, 184, 79, 0.6)' : GOLD_BORDER}`,
+            background: isValid && !isSubmitting ? 'rgba(224, 184, 79, 0.15)' : 'transparent',
             color: GOLD,
             fontFamily: 'var(--font-geist-sans)',
             fontSize: '0.75rem',
             fontWeight: 500,
             textTransform: 'uppercase',
             letterSpacing: '0.18em',
-            cursor: isValid ? 'pointer' : 'not-allowed',
-            opacity: isValid ? 1 : 0.4,
+            cursor: isValid && !isSubmitting ? 'pointer' : 'not-allowed',
+            opacity: isValid && !isSubmitting ? 1 : 0.4,
             transition: 'opacity 0.2s, background 0.2s, border-color 0.2s',
           }}
         >
-          {t.rsvp.submit}
+          {isSubmitting ? t.rsvp.submitting : t.rsvp.submit}
         </button>
       </form>
       </div>

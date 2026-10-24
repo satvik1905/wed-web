@@ -52,7 +52,9 @@ export interface Dictionary {
     attendingNo: string;
     guestCount: string;
     submit: string;
+    submitting: string;
     submitted: string;
+    error: string;
   };
   itinerary: {
     heading: string;
@@ -155,7 +157,9 @@ const en: Dictionary = {
     attendingNo: "No",
     guestCount: "Number of Guests",
     submit: "Submit",
+    submitting: "Sending...",
     submitted: "Thank you for your response!",
+    error: "Something went wrong. Please try again.",
   },
   itinerary: {
     heading: "The Celebrations",
@@ -278,8 +282,10 @@ const mr: Dictionary = {
     guestCount:
       "\u092A\u093E\u0939\u0941\u0923\u094D\u092F\u093E\u0902\u091A\u0940 \u0938\u0902\u0916\u094D\u092F\u093E",
     submit: "\u0938\u0941\u092A\u0942\u0930\u094D\u0926 \u0915\u0930\u093E",
+    submitting: "\u092A\u093E\u0920\u0935\u0924 \u0906\u0939\u0947...",
     submitted:
       "\u0924\u0941\u092E\u091A\u094D\u092F\u093E \u092A\u094D\u0930\u0924\u093F\u0938\u093E\u0926\u093E\u092C\u0926\u094D\u0926\u0932 \u0927\u0928\u094D\u092F\u0935\u093E\u0926!",
+    error: "\u0915\u093E\u0939\u0940\u0924\u0930\u0940 \u091A\u0942\u0915 \u0939\u094B\u0924\u0940. \u0915\u0943\u092A\u092F\u093E \u092A\u0941\u0928\u094D\u0939\u093E \u092A\u094D\u0930\u092F\u0924\u094D\u0928 \u0915\u0930\u093E.",
   },
   itinerary: {
     heading: "\u0938\u094B\u0939\u0933\u0947",
