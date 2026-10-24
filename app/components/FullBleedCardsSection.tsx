@@ -24,7 +24,7 @@ const ILLUSTRATIONS: Record<string, string> = {
   haldi: '/haldi.png',
   mayra: '/mayra.png',
   sangeet: '/sangeet.png',
-  wedding: '',
+  wedding: '/wedding.png',
   reception: '',
 };
 
